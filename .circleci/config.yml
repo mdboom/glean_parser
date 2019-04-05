@@ -8,9 +8,9 @@ jobs:
             - run:
                     name: install
                     command: |
+                        export PATH=.:$HOME/.local/bin:$PATH
                         pip install --user -U -r requirements_dev.txt
                         curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint
-                        export PATH=.:$PATH
 
             - run:
                     name: lint
