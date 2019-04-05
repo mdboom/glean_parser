@@ -5,11 +5,24 @@ jobs:
             - image: circleci/python:3.7.2
         steps:
             - checkout
-            - pip install -U -r requirements_dev.txt
-            - curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint
-            - export PATH=.:$PATH
-            - make lint
-            - make test-all
-            - python setup.py install
-            - make docs
-            - touch docs/_build/html/.nojekyll
+            - run:
+                    name: install
+                    command: |
+                        pip install -U -r requirements_dev.txt
+                        curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint
+                        export PATH=.:$PATH
+
+            - run:
+                    name: lint
+                    command: make lint
+            - run:
+                    name: test
+                    command: make test-all
+            - run:
+                    name: install
+                    command: python setup.py install
+            - run:
+                    name: make-docs
+                    command: |
+                        make docs
+                        touch docs/_build/html/.nojekyll
