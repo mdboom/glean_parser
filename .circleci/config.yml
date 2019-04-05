@@ -13,7 +13,7 @@ jobs:
                     name: install
                     command: |
                         pip install --user -U -r requirements_dev.txt
-                        apt install openjdk-8-jdk-headless
+                        sudo apt install openjdk-8-jdk-headless
                         curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint
 
             - run:
