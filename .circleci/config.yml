@@ -24,7 +24,7 @@ jobs:
                     command: make test-all
             - run:
                     name: install
-                    command: python setup.py install
+                    command: python setup.py install --user
             - run:
                     name: make-docs
                     command: |
