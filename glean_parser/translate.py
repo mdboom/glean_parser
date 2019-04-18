@@ -44,9 +44,9 @@ def translate(
     if output_format not in OUTPUTTERS:
         raise ValueError(f"Unknown output format '{output_format}'")
 
-    all_metrics = parser.parse_metrics(input_filepaths, parser_config)
+    all_objects = parser.parse_objects(input_filepaths, parser_config)
     found_error = False
-    for error in all_metrics:
+    for error in all_objects:
         found_error = True
         print('=' * 78, file=sys.stderr)
         print(error, file=sys.stderr)
@@ -56,7 +56,7 @@ def translate(
     # Write everything out to a temporary directory, and then move it to the
     # real directory, for transactional integrity.
     with tempfile.TemporaryDirectory() as tempdir:
-        OUTPUTTERS[output_format](all_metrics.value, Path(tempdir), options)
+        OUTPUTTERS[output_format](all_objects.value, Path(tempdir), options)
 
         if output_dir.is_file():
             output_dir.unlink()
